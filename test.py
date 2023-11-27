@@ -15,3 +15,6 @@ class TestProject(models.Model):
     surname = fields.Char(string="Surname")
     id_number = fields.Char(string="ID Number", required=True, copy=False)
     
+
+
+    
