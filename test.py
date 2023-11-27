@@ -9,7 +9,7 @@ class TestProject(models.Model):
 
     _name = 'test.project'
     _description = 'Test Project'
-    _order = 'name desc'
+    _order = 'name'
 
     name = fields.Char(string="Name")
     surname = fields.Char(string="Surname")
