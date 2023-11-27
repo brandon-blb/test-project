@@ -13,5 +13,3 @@ class TestProject(models.Model):
     name = fields.Char(string="Name")
     surname = fields.Char(string="Surname")
     id_number = fields.Char(string="ID Number")
-
-    
