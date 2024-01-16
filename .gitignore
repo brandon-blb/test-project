@@ -5,4 +5,3 @@ odoo_source
 .vscode
 .idea
 dev-odoo.conf
-.env
