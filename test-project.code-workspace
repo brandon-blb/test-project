@@ -1,0 +1,66 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},{
+			"path": "./odoo_source",
+		},
+		{
+			"path": "../addons16",
+			"name": "addons",
+		},
+	],
+	"settings": {
+
+		// Project Specific Settings
+		"python.autoComplete.extraPaths": [
+			".",
+			"./odoo_source",
+			"${workspaceFolder:addons}",
+		],
+		"python.analysis.extraPaths": [
+			".",
+			"./odoo_source",
+			"${workspaceFolder:addons}",
+		],
+		"VsCodeTaskButtons.tasks": [
+			{
+				"label": "$(sync) Odoo Tasks",
+				"tooltip": "Run Odoo Specific Tasks",
+				"tasks": [
+					{
+						"label": "$(code) Update Modules",
+						"task": "update-module",
+						"tooltip": "Promts to update a module",
+					},
+				]
+			},
+		],
+		
+		"files.exclude": {
+			"**/*.pyc": true,
+			"odoo_source": true,
+		},
+
+		// Odoo Development Settings
+		"VsCodeTaskButtons.showCounter": false,
+		"git.ignoreLimitWarning": true,
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 500,
+		
+		// Python type checking
+		"python.languageServer": "None",
+		"python.analysis.autoImportCompletions": true,
+		"python.analysis.typeCheckingMode": "basic",
+		"python.analysis.enablePytestSupport": true,
+		"python.analysis.enablePytestExtra": true,
+		"python.analysis.diagnosticSeverityOverrides": {
+			// "reportMissingModuleSource": "none",
+			// "reportGeneralTypeIssues": "none",
+		},
+		// XML settings
+		// "xml.format.preserveEmptyContent": true,
+		// "xml.format.joinCDATALines": true,
+		// "xml.format.joinContentLines": true,
+	}
+}

@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  odoo:
+    image: ${OP_IMAGE_NAME}
+    container_name: ${OP_CONTAINER_NAME}
+    ports:
+      - "10000:8069"
+      - "10001:8072"
+      - "10002:9999"
+    tty: true
+    init: true
+    external_links:
+      - ${DB_CONTAINER_NAME:-postgres}
+    networks:
+      - ${DB_NETWORK:-postgres_default}
+    environment:
+      - HOST=${DB_CONTAINER_NAME:-postgres}
+      - PGHOST=${DB_CONTAINER_NAME:-postgres}
+
+      - POSTGRES_USER=${DB_USERNAME:-odoo}
+      - PGUSER=${DB_USERNAME:-odoo}
+      
+      - PGPASSWORD=${DB_PASSWORD:-odoo}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-odoo}
+      
+    volumes:
+      - odoo_data:/var/lib/odoo/
+      - ${SUDO_REPO_PATH}/${OP_REPO_NAME}:/mnt/extra-addons/${OP_REPO_NAME}
+      - ${SUDO_REPO_PATH}/${OP_ADDONS_NAME}:/mnt/extra-addons/${OP_ADDONS_NAME}
+      - ./dev-odoo.conf:/etc/odoo/odoo.conf
+
+    command: [
+      "sh","-c",
+      "pip3 install debugpy && python3 -m debugpy --listen 0.0.0.0:9999 /usr/bin/odoo -c /etc/odoo/odoo.conf --dev xml",
+    ]
+
+volumes:
+  odoo_data:
+    name: ${OP_VOLUME_NAME}
+    external: True
+
+networks:
+  postgres_default:
+    name: ${DB_NETWORK:-postgres_default}
+    external: true
